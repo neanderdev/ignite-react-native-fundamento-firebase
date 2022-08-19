@@ -23,6 +23,15 @@ export function ShoppingList() {
         setProducts(data);
       })
       .catch(error => console.error(error));
+
+    // firestore()
+    //   .collection('products')
+    //   .doc('my-custom-id')
+    //   .get()
+    //   .then(response => console.log({
+    //     id: response.id,
+    //     ...response.data(),
+    //   }));
   }, []);
 
   return (
