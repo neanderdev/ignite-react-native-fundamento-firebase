@@ -9,29 +9,20 @@ export function ShoppingList() {
   const [products, setProducts] = useState<ProductProps[]>([]);
 
   useEffect(() => {
-    firestore()
+    const subscribe = firestore()
       .collection('products')
-      .get()
-      .then(response => {
-        const data = response.docs.map(doc => {
+      .onSnapshot(querySnapshot => {
+        const data = querySnapshot.docs.map((doc) => {
           return {
             id: doc.id,
             ...doc.data(),
-          }
+          };
         }) as ProductProps[];
 
         setProducts(data);
-      })
-      .catch(error => console.error(error));
+      });
 
-    // firestore()
-    //   .collection('products')
-    //   .doc('my-custom-id')
-    //   .get()
-    //   .then(response => console.log({
-    //     id: response.id,
-    //     ...response.data(),
-    //   }));
+    return () => subscribe();
   }, []);
 
   return (
