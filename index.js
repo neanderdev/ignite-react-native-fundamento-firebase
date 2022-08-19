@@ -12,11 +12,11 @@ if (__DEV__) {
       firestore()
         .clearPersistence()
         .then(() => {
-          firestore().useEmulator("localhost", 8000);
+          firestore().useEmulator("localhost", 8080);
         })
-        .catch(() => console.error("Clear persistence error"));
+        .catch(() => console.log("Clear persistence error"));
     })
-    .catch(() => console.error("Terminate error"));
+    .catch(() => console.log("Terminate error"));
 }
 
 firestore();
