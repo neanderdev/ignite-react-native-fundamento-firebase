@@ -6,20 +6,10 @@ import "@react-native-firebase/app";
 import firestore from "@react-native-firebase/firestore";
 
 if (__DEV__) {
-  firestore()
-    .terminate()
-    .then(() => {
-      firestore()
-        .clearPersistence()
-        .then(() => {
-          firestore().useEmulator("localhost", 8080);
-        })
-        .catch(() => console.log("Clear persistence error"));
-    })
-    .catch(() => console.log("Terminate error"));
+  firestore().useEmulator("localhost", 8080);
 }
 
-firestore();
+const db = firestore();
 
 import App from "./App";
 
