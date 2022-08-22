@@ -19,7 +19,20 @@ export function SignIn() {
 
   async function handleCreateUserAccount() {
     auth().createUserWithEmailAndPassword(email, password)
-      .then(() => Alert.alert('Usuário criado com sucesso!'));
+      .then(() => Alert.alert('Usuário criado com sucesso!'))
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          return Alert.alert('E-mail não disponível. Escolha outro e-mail para cadastrar!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          return Alert.alert('E-mail inválido!');
+        }
+
+        if (error.code === 'auth/weak-password') {
+          return Alert.alert('A senha deve ter 6 dígitos!');
+        }
+      });
   }
 
   return (
